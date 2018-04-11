@@ -100,4 +100,4 @@ Target "Release" (fun _ ->
   ==> "Push"
   ==> "Release"
 
-RunTargetOrDefault "Release"
+RunTargetOrDefault "Pack"
