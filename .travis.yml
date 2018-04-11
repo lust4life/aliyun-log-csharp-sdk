@@ -1,0 +1,37 @@
+language: csharp
+dist: trusty
+sudo: false
+dotnet: 2.0.3
+
+matrix:
+  fast_finish: true
+  
+  include:
+    - os: linux
+      mono: 5.4.1
+    - os: linux
+      mono: 5.10.0
+    - os: linux
+      mono: weekly
+    - os: linux
+      mono: latest
+    - os: osx
+      osx_image: xcode9.3beta
+      mono: latest
+
+  allow_failures:
+    - os: linux
+    - mono: weekly
+    - mono: latest
+
+env:
+  global:
+    - DOTNET_CLI_TELEMETRY_OPTOUT: 1
+    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    - TMPDIR=/tmp
+
+script:
+  - travis_wait ./build.sh
+
+notifications:
+  email: false

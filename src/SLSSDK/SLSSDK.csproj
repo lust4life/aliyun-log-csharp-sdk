@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblyName>Aliyun.Api.Log</AssemblyName>
+    <Description>Logary support for ASP.NET Core logging</Description>
+    <Version>1.0.0</Version>
+    <Authors>Aliyun, Jun</Authors>
+    <PackageTags>log;aliyun;netcore</PackageTags>
+    <PackageProjectUrl>https://github.com/lust4life/aliyun-log-csharp-sdk</PackageProjectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+  </PropertyGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

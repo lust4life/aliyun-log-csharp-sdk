@@ -1,0 +1,20 @@
+source https://api.nuget.org/v3/index.json
+
+framework auto-detect
+redirects on
+
+nuget Google.Protobuf
+
+group Build
+    source https://api.nuget.org/v3/index.json
+    framework auto-detect
+    nuget FAKE
+    github fsharp/FAKE modules/Octokit/Octokit.fsx
+
+group Examples
+    source https://api.nuget.org/v3/index.json
+    framework auto-detect
+    redirects on
+
+    nuget Microsoft.AspNetCore.App == 2.1.0-preview1-final preview
+    nuget Microsoft.NETCore.Platforms == 2.1.0-preview1-26216-02 preview
