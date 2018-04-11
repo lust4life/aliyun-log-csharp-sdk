@@ -28,7 +28,7 @@ Target "Build" (fun _ ->
   DotNetCli.Build (fun p ->
   { p with
       Configuration = configuration
-      Project = "./Aliyun.Api.Log/Aliyun.Api.Log.sln"
+      Project = "Aliyun.Api.Log.sln"
   })
 )
 
