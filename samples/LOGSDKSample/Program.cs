@@ -12,12 +12,17 @@ namespace Aliyun.Api.LOG.sample
     {
         static void Main(string[] args)
         {
+          var endPoint = Environment.GetEnvironmentVariable("endpoint");
+          var keyId = Environment.GetEnvironmentVariable("keyId");
+          var key = Environment.GetEnvironmentVariable("key");
+          var pj = Environment.GetEnvironmentVariable("project");
+          var ls = Environment.GetEnvironmentVariable("logstore");
             // select you endpoint https://help.aliyun.com/document_detail/29008.html
-            String endpoint = "your project region endpoint",
-                accesskeyId = "your accesskey id",
-                accessKey = "your access key",
-                project = "",
-                logstore = "";
+            String endpoint = endPoint,
+                accesskeyId = keyId,
+                accessKey = key,
+                project = pj,
+                logstore = ls;
             LogClient client = new LogClient(endpoint, accesskeyId, accessKey);
             //init http connection timeout
             client.ConnectionTimeout = client.ReadWriteTimeout = 10000;
