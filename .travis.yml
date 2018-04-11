@@ -8,21 +8,12 @@ matrix:
   
   include:
     - os: linux
-      mono: 5.4.1
-    - os: linux
-      mono: 5.10.0
-    - os: linux
-      mono: weekly
-    - os: linux
-      mono: latest
     - os: osx
-      osx_image: xcode9.3beta
-      mono: latest
+      osx_image: xcode9.2
 
   allow_failures:
-    - os: linux
-    - mono: weekly
-    - mono: latest
+    - os: osx
+    
 
 env:
   global:
