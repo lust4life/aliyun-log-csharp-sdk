@@ -15,10 +15,11 @@ group Build
     nuget Google.Protobuf.Tools
     
 
-group Examples
+group Test
     source https://api.nuget.org/v3/index.json
     framework auto-detect
     redirects on
 
-    nuget Microsoft.AspNetCore.App == 2.1.0-preview1-final preview
-    nuget Microsoft.NETCore.Platforms == 2.1.0-preview1-26216-02 preview
+    nuget Microsoft.NET.Test.Sdk
+    nuget MSTest.TestAdapter
+    nuget MSTest.TestFramework

@@ -143,18 +143,17 @@ namespace LOGSDKTest
         {
             LogClient client = new LogClient(ClientTestData.TEST_ENDPOINT, ClientTestData.TEST_ACCESSKEYID, ClientTestData.TEST_ACCESSKEY);
             client.SetWebSend(MockSend);
-            LogGroup.Builder lgBuilder = LogGroup.CreateBuilder();
+            var lgBuilder = new LogGroup();
             lgBuilder.Topic = "testTopic";
             lgBuilder.Source = "127.0.0.1";
-            Aliyun.Api.LOG.Log.Builder logBuilder = Aliyun.Api.LOG.Log.CreateBuilder();
+            var logBuilder = new Aliyun.Api.LOG.Log();
             logBuilder.Time = 1000;
-            Aliyun.Api.LOG.Log.Types.Content.Builder contentBuilder = Aliyun.Api.LOG.Log.Types.Content.CreateBuilder();
+            var contentBuilder = new Aliyun.Api.LOG.Log.Types.Content();
             contentBuilder.Key = "mockKey";
             contentBuilder.Value = "mockValue";
-            logBuilder.AddContents(contentBuilder);
-            lgBuilder.AddLogs(logBuilder);
-            LogGroup tmpLogGroup = lgBuilder.Build();
-            client.PutLogs(new PutLogsRequest(ClientTestData.TEST_PROJECT, "testlogstore"), tmpLogGroup);
+            logBuilder.Contents.Add(contentBuilder);
+            lgBuilder.Logs.Add(logBuilder);
+            client.PutLogs(new PutLogsRequest(ClientTestData.TEST_PROJECT, "testlogstore"), lgBuilder);
             Assert.IsTrue(DicToString(Headers).CompareTo("[x-sls-apiversion:0.4.0][x-sls-bodyrawsize:49][x-sls-signaturemethod:hmac-sha1][Content-Type:application/x-protobuf][x-sls-compresstype:deflate][Content-MD5:3D1836DDC6585AD78B60CCAE90C075DF][User-Agent:aliyun-sdk-dotnet/1.0.0.0]") == 0);
             Assert.IsTrue(Host.CompareTo("mock_project.mockhost.aliyuncs.com") == 0);
             Assert.IsTrue(RequestUri.CompareTo("http://mock_project.mockhost.aliyuncs.com/logstores/testlogstore") == 0);

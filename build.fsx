@@ -34,11 +34,9 @@ Target "Build" (fun _ ->
 
 Target "Tests" (fun _ ->
   let commandLine (file: string) =
-    let projectName = file.Substring(0, file.Length - ".fsproj".Length) |> Path.GetFileName
-    let path = Path.GetDirectoryName file
-    sprintf "%s/bin/%s/netcoreapp2.0/%s.dll --summary" path configuration projectName
+    sprintf "test %s" file
   Seq.concat [
-    !! "test/**/*.fsproj"
+    !! "test/**/*.csproj"
   ]
   |> Seq.iter (commandLine >> DotNetCli.RunCommand id))
 
