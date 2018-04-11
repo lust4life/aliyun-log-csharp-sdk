@@ -95,7 +95,7 @@ Target "Release" (fun _ ->
 "Clean"
   ==> "ProjectVersion"
   ==> "Build"
-  ==> "Tests"
+  // ==> "Tests" // skip test
   ==> "Pack"
   ==> "Push"
   ==> "Release"
