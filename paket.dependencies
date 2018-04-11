@@ -4,12 +4,16 @@ framework auto-detect
 redirects on
 
 nuget Google.Protobuf
+nuget Newtonsoft.Json
+nuget lz4net
 
 group Build
     source https://api.nuget.org/v3/index.json
     framework auto-detect
     nuget FAKE
     github fsharp/FAKE modules/Octokit/Octokit.fsx
+    nuget Google.Protobuf.Tools
+    
 
 group Examples
     source https://api.nuget.org/v3/index.json

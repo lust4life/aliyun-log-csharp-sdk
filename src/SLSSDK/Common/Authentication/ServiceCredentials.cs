@@ -32,7 +32,7 @@ namespace Aliyun.Api.LOG.Common.Authentication
         public ServiceCredentials(string accessId, string accessKey)
         {
             if (string.IsNullOrEmpty(accessId))
-                throw new ArgumentException(Aliyun.Api.LOG.Properties.Resources.ExceptionIfArgumentStringIsNullOrEmpty, "accessId");
+                throw new ArgumentException("ExceptionIfArgumentStringIsNullOrEmpty", "accessId");
 
             AccessId = accessId;
             AccessKey = accessKey;

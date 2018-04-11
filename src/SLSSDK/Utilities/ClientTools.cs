@@ -6,8 +6,6 @@
  */
 using Aliyun.Api.LOG.Common.Authentication;
 using Aliyun.Api.LOG.Common.Communication;
-using Aliyun.Api.LOG;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -16,61 +14,32 @@ using System.IO;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.IO.Compression;
-using LZ4Sharp;
-using Lz4;
+using LZ4;
 
 namespace Aliyun.Api.LOG.Utilities
 {
     internal class LogClientTools
     {
-        public static byte[] CompressToZlib(byte[] buffer)
-        {
-            using (MemoryStream compressStream = new MemoryStream())
-            {
-                using (ZLibNet.ZLibStream gz = new ZLibNet.ZLibStream(compressStream, ZLibNet.CompressionMode.Compress, ZLibNet.CompressionLevel.Level6, true))
-                {
-                    gz.Write(buffer, 0, buffer.Length);
-                    compressStream.Seek(0, SeekOrigin.Begin);
-                byte[] compressBuffer = new byte[compressStream.Length];
-                compressStream.Read(compressBuffer, 0, compressBuffer.Length);
-                return compressBuffer;
-                }
-            }
-        }
-        public static byte[] DecompressFromZlib(Stream stream, int rawSize)
-        {
-            using (stream)
-            {
-                using (ZLibNet.ZLibStream dz = new ZLibNet.ZLibStream(stream, ZLibNet.CompressionMode.Decompress))
-                {
-                    byte[] buffer = new byte[rawSize];
-                    dz.Read(buffer, 0, buffer.Length);
-                    return buffer;
-                }
-            }
-        }
         public static byte[] CompressToLz4(byte[] buffer)
         {
-            var compressor = LZ4CompressorFactory.CreateNew();
-            return compressor.Compress(buffer);
+          return LZ4.LZ4Codec.Wrap(buffer);
         }
+      
         public static byte[] DecompressFromLZ4(Stream stream, int rawLength)
         {
-            using (stream)
-            {
-                using (Lz4DecoderStream streamInner = new Lz4DecoderStream(stream))
-                {
-                    byte[] output = new byte[rawLength];
-                    streamInner.Read(output, 0, rawLength);
-                    return output;
-                }
-            }
+          using (var lz4Stream = new LZ4Stream(stream, LZ4StreamMode.Decompress))
+          {
+            byte[] output = new byte[rawLength];
+            lz4Stream.Read(output, 0, rawLength);
+            return output;
+          }
         }
+      
         public static string GetMd5Value(byte[] buffer)
         {
             return GetMd5Value(buffer,0,buffer.Length);
         }
+      
         public static string GetMd5Value(byte[] buffer,int offset, int count)
         {
             MD5 hash = MD5.Create(LogConsts.NAME_MD5);

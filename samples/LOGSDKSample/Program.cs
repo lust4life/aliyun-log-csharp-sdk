@@ -87,7 +87,7 @@ namespace Aliyun.Api.LOG.sample
                 String cursor = client.GetCursor(new GetCursorRequest(project, logstore, listResp.Shards[i], ShardCursorMode.BEGIN)).Cursor;
                 Console.WriteLine("Cursor : " + cursor);
                 BatchGetLogsResponse batchGetResp = client.BatchGetLogs(new BatchGetLogsRequest(project, logstore, listResp.Shards[i], cursor, 10));
-                Console.WriteLine("Batch get log, shard id : " + listResp.Shards[i].ToString() + ", log count : " + batchGetResp.LogGroupList.LogGroupList_Count.ToString());
+                Console.WriteLine("Batch get log, shard id : " + listResp.Shards[i].ToString() + ", log count : " + batchGetResp.LogGroupList.LogGroupList_.Count);
             }
         }
     }

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using Google.Protobuf;
 
 namespace Aliyun.Api.LOG
 {
@@ -272,10 +273,9 @@ namespace Aliyun.Api.LOG
         /// <param name="request">The request to put logs </param>
         /// <exception>LogException</exception>
         /// <returns>The response to put logs</returns>
-        public PutLogsResponse PutLogs(PutLogsRequest request) 
+        public PutLogsResponse PutLogs(PutLogsRequest request)
         {
-            LogGroup.Builder lgBuilder = LogGroup.CreateBuilder();
-            
+            var lgBuilder = new LogGroup();
             if (request.IsSetTopic())
                 lgBuilder.Topic = request.Topic;
 
@@ -288,27 +288,27 @@ namespace Aliyun.Api.LOG
             {
                 foreach (var item in request.LogItems)
                 {
-                    Log.Builder logBuilder = Log.CreateBuilder();
+                    var logBuilder = new Log();
                     logBuilder.Time = item.Time;
                     foreach (var kv in item.Contents)
                     {
-                        Log.Types.Content.Builder contentBuilder = Log.Types.Content.CreateBuilder();
+                        var contentBuilder = new Log.Types.Content();
                         contentBuilder.Key = kv.Key;
                         contentBuilder.Value = kv.Value;
-                        logBuilder.AddContents(contentBuilder);
+                        logBuilder.Contents.Add(contentBuilder);
                     }
-                    lgBuilder.AddLogs(logBuilder);
+                    lgBuilder.Logs.Add(logBuilder);
                 }
             }
 
-            return PutLogs(request, lgBuilder.Build());
+            return PutLogs(request, lgBuilder);
         }
 
         internal PutLogsResponse PutLogs(PutLogsRequest request, LogGroup logGroup)
         {
-            if (logGroup.LogsCount > LogConsts.LIMIT_LOG_COUNT)
+            if (logGroup.Logs.Count > LogConsts.LIMIT_LOG_COUNT)
                 throw new LogException("InvalidLogSize", "logItems' length exceeds maximum limitation： " + LogConsts.LIMIT_LOG_COUNT + " lines.");
-            else if(logGroup.SerializedSize > LogConsts.LIMIT_LOG_SIZE)
+            else if(logGroup.CalculateSize() > LogConsts.LIMIT_LOG_SIZE)
                 throw new LogException("InvalidLogSize", "logItems' size exceeds maximum limitation: " + LogConsts.LIMIT_LOG_SIZE + " byte.");
             using (ServiceRequest sReq = new ServiceRequest())
             {

@@ -34,7 +34,7 @@ namespace Aliyun.Api.LOG.Response
             {
                 int.TryParse(tmpContentLength, out contentLength);
             }
-            _logGroupList = LogGroupList.ParseFrom(LogClientTools.DecompressFromLZ4(body, _rawSize));
+            _logGroupList = LogGroupList.Parser.ParseFrom(LogClientTools.DecompressFromLZ4(body, _rawSize));
         }
 
         public String NextCursor

@@ -1,13 +1,13 @@
-import "google/protobuf/csharp_options.proto";
-option (google.protobuf.csharp_file_options).namespace = "Aliyun.Api.LOG";
+syntax = "proto3";
 
+package Aliyun.Api.LOG;
 message Log
 {
-    required uint32 Time = 1;// UNIX Time Format
+    uint32 Time = 1;// UNIX Time Format
     message Content
     {
-        required string Key = 1;
-        required string Value = 2;
+        string Key = 1;
+        string Value = 2;
     }  
     repeated Content Contents= 2;
 
@@ -15,9 +15,9 @@ message Log
 message LogGroup
 {
     repeated Log Logs= 1;
-    optional string Reserved =2; // ÄÚ²¿×Ö¶Î£¬²»ĞèÒªÌîĞ´
-    optional string Topic = 3;
-    optional string Source = 4;
+    string Reserved =2; // å†…éƒ¨å­—æ®µï¼Œä¸éœ€è¦å¡«å†™
+    string Topic = 3;
+    string Source = 4;
 }
 
 message LogGroupList

@@ -22,9 +22,9 @@ namespace Aliyun.Api.LOG.Common.Authentication
         public string ComputeSignature(String key, String data)
         {
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentException(Aliyun.Api.LOG.Properties.Resources.ExceptionIfArgumentStringIsNullOrEmpty, "key");
+                throw new ArgumentException("ExceptionIfArgumentStringIsNullOrEmpty", "key");
             if (string.IsNullOrEmpty(data))
-                throw new ArgumentException(Aliyun.Api.LOG.Properties.Resources.ExceptionIfArgumentStringIsNullOrEmpty, "data");
+                throw new ArgumentException("ExceptionIfArgumentStringIsNullOrEmpty", "data");
 
             return ComputeSignatureCore(key, data);
         }
