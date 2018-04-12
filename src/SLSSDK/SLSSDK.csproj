@@ -5,7 +5,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyName>Aliyun.Api.Log</AssemblyName>
     <PackageId>aliyun-log-csharp-sdk</PackageId>
-    <Description>Logary support for ASP.NET Core logging</Description>
+    <Description>aliyun log sdk c# netcore</Description>
     <Version>1.0.0</Version>
     <Authors>Aliyun, Jun</Authors>
     <PackageTags>log;aliyun;netcore</PackageTags>
