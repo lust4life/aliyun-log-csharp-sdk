@@ -6,7 +6,7 @@
     <AssemblyName>Aliyun.Api.Log</AssemblyName>
     <PackageId>aliyun-log-csharp-sdk</PackageId>
     <Description>aliyun log sdk c# netcore</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Aliyun, Jun</Authors>
     <PackageTags>log;aliyun;netcore</PackageTags>
     <PackageProjectUrl>https://github.com/lust4life/aliyun-log-csharp-sdk</PackageProjectUrl>
