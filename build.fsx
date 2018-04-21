@@ -43,6 +43,7 @@ Target "Tests" (fun _ ->
 let packParameters name =
   [ "--no-build"
     "--no-restore"
+    sprintf "/p:PackageReleaseNotes=\"%O\"" ((toLines release.Notes).Replace(",","").Replace(";", "—"))
   ]
   |> String.concat " "
 

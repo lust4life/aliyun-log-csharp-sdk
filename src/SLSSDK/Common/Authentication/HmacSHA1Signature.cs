@@ -34,14 +34,12 @@ namespace Aliyun.Api.LOG.Common.Authentication
         {
             Debug.Assert(!string.IsNullOrEmpty(data));
 
-            using (KeyedHashAlgorithm algorithm = KeyedHashAlgorithm.Create(
-                this.SignatureMethod.ToString().ToUpperInvariant()))
+            using (var hmac = new HMACSHA1())
             {
-                algorithm.Key = _encoding.GetBytes(key.ToCharArray());
-                return Convert.ToBase64String(
-                    algorithm.ComputeHash(_encoding.GetBytes(data.ToCharArray())));
+              hmac.Key = _encoding.GetBytes(key.ToCharArray());
+              return Convert.ToBase64String(
+                    hmac.ComputeHash(_encoding.GetBytes(data.ToCharArray())));
             }
         }
-
     }
 }
